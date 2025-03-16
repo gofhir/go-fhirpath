@@ -4,12 +4,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/buger/jsonparser"
-	"go-fhirpath/fhirpath/handlers"
-	parser "go-fhirpath/fhirpath/parser/grammar"
+	"github.com/gofhir/go-fhirpath/fhirpath/handlers"
+	parser "github.com/gofhir/go-fhirpath/fhirpath/parser/grammar"
 	"strings"
 
-	_ "go-fhirpath/fhirpath/existence"
-	_ "go-fhirpath/fhirpath/other"
+	_ "github.com/gofhir/go-fhirpath/fhirpath/existence"
+	_ "github.com/gofhir/go-fhirpath/fhirpath/other"
 )
 
 // ExtractValueListener Custom listener for extracting a FHIRPath value

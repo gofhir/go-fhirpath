@@ -3,7 +3,7 @@ package existence
 import (
 	"fmt"
 	"github.com/buger/jsonparser"
-	"go-fhirpath/fhirpath/handlers"
+	"github.com/gofhir/go-fhirpath/fhirpath/handlers"
 	"regexp"
 	"strings"
 )

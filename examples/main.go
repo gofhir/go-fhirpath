@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"go-fhirpath/fhirpath"
+	"github.com/gofhir/go-fhirpath/fhirpath"
 )
 
 func main() {

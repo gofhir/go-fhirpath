@@ -3,7 +3,7 @@ package other
 import (
 	"encoding/json"
 	"github.com/buger/jsonparser"
-	"go-fhirpath/fhirpath/handlers"
+	"github.com/gofhir/go-fhirpath/fhirpath/handlers"
 )
 
 // HandleFirstElement Handles `first()` function extraction

@@ -2,7 +2,7 @@ package existence
 
 import (
 	"fmt"
-	"go-fhirpath/fhirpath/handlers"
+	"github.com/gofhir/go-fhirpath/fhirpath/handlers"
 )
 
 func handleEmptyClause(jsonData string) string {

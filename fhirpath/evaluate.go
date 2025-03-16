@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/antlr4-go/antlr/v4"
-	parser "go-fhirpath/fhirpath/parser/grammar"
+	parser "github.com/gofhir/go-fhirpath/fhirpath/parser/grammar"
 )
 
 func Evaluate(resourceJSON string, fhirPathExpr string) []byte {

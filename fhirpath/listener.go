@@ -84,7 +84,7 @@ func extractFromObjectsAndArrays(jsonData string, lastKey string) string {
 		if err != nil || dataType != jsonparser.Object {
 			fmt.Println("Error decoding JSON:", err)
 			return
-		}
+		}:
 
 		subValue, subType, _, subErr := jsonparser.Get(data, strings.Split(lastKey, ".")...)
 		if subErr == nil {

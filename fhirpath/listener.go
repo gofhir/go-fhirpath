@@ -20,7 +20,15 @@ type ExtractValueListener struct {
 }
 
 func (l *ExtractValueListener) ExitInvocationExpression(ctx *parser.InvocationExpressionContext) {
-	fhirPath := strings.TrimPrefix(ctx.GetText(), "Patient.")
+	
+	resourceType, _, _, err := jsonparser.Get(l.ResourceJSON, "resourceType")
+	if err != nil {
+		l.Result = `[]`
+		return
+	}
+
+	fhirPath := strings.TrimPrefix(ctx.GetText(), string(resourceType)+".")
+
 	fmt.Printf("FHIRPath: %s\n", fhirPath)
 
 	// Try extracting value directly
@@ -78,15 +86,29 @@ func extractFromObjectsAndArrays(jsonData string, lastKey string) string {
 			return
 		}
 
+		fmt.Printf("%s: %s\n", lastKey, string(data))
+
 		subValue, subType, _, subErr := jsonparser.Get(data, strings.Split(lastKey, ".")...)
+		fmt.Printf("SubValue: %s\n", subValue)
 		if subErr == nil {
 			if subType == jsonparser.Array {
+				fmt.Println("SubValue is an Array")
 				_, _ = jsonparser.ArrayEach(subValue, func(innerValue []byte, innerType jsonparser.ValueType, _ int, _ error) {
 					if innerType == jsonparser.String {
 						extractedValues = append(extractedValues, string(innerValue))
+					} else {
+						var parsedValue interface{}
+
+						if err := json.Unmarshal(innerValue, &parsedValue); err == nil {
+							extractedValues = append(extractedValues, parsedValue) // Store parsed JSON if it's valid
+						} else {
+							extractedValues = append(extractedValues, string(innerValue)) // Otherwise, store as a raw string
+
+						}
 					}
 				})
 			} else if subType == jsonparser.Object {
+				fmt.Println("SubValue is an object")
 				var parsedValue interface{}
 
 				if err := json.Unmarshal(subValue, &parsedValue); err == nil {
